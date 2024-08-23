@@ -42,10 +42,10 @@ export default function Home() {
             Everything you need to manage your health, all in one place.
           </p>
         </div>
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12 px-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 px-6">
           {/* Feature 1 */}
           <motion.div
-            className="bg-white p-8 rounded-lg shadow-lg"
+            className="bg-white p-8 rounded-lg shadow-lg w-full"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
@@ -63,7 +63,7 @@ export default function Home() {
           </motion.div>
           {/* Feature 2 */}
           <motion.div
-            className="bg-white p-8 rounded-lg shadow-lg"
+            className="bg-white p-8 rounded-lg shadow-lg w-full"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -81,7 +81,7 @@ export default function Home() {
           </motion.div>
           {/* Feature 3 */}
           <motion.div
-            className="bg-white p-8 rounded-lg shadow-lg"
+            className="bg-white p-8 rounded-lg shadow-lg w-full"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
