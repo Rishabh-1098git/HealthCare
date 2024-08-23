@@ -1,7 +1,13 @@
 import "./App.css";
-
+import Header from "./components/Header";
+import Home from "./pages/Home";
 function App() {
-  return <div className="font-mono text-3xl bg-slate-400">HeathCare SIH</div>;
+  return (
+    <>
+      <Header />
+      <Home />
+    </>
+  );
 }
 
 export default App;
