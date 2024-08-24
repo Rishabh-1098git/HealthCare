@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: rgb(253, 252, 251);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: rgb(146, 175, 238);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 10px 10px 10px 10px rgba(116, 133, 196, 0.5);
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .container input,
+        .container textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid rgb(38, 140, 229);
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .container label {
+            margin-bottom: 10px;
+            display: block;
+            font-weight: bold;
+        }
+
+        .container .gender-group {
+            margin: 10px 0;
+        }
+
+        .container .gender-group input[type="radio"] {
+            margin-right: 5px;
+            cursor: pointer;
+            accent-color: #007bff;
+        }
+
+        .container .gender-group label {
+            margin-right: 15px;
+            font-size: 16px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .container .gender_field {
+            display: flex;
+            justify-content: space-between;
+
+        }
+
+        .container button {
+            width: 100%;
+            padding: 10px;
+            background-color: rgb(74, 106, 203);
+            color: azure;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .container button:hover {
+            background-color: rgb(47, 57, 170);
+        }
+
+        .message {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .success {
+            color: green;
+            font-size: 16px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Doctor Registration Form</h2>
+        <form id="registrationForm">
+            <h4>LOGIN CREDIANTIALS</h4>
+            <div>
+                <label for="username">Doctor's Name:</label>
+                <input type="text" id="username" name="username" placeholder="Enter the username">
+                <div id="usernameError" class="error"></div>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter the email">
+                <div id="emailError" class="error"></div>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" placeholder="Enter the password"/><br>
+                <div id="passwordError" class="error"></div>
+            </div>
+            <div>
+                <label for="confirmpassword">Confirm Password:</label>
+                <input type="password" name="confirmpassword" id="confirmpassword" placeholder="Enter the password again"/><br>
+                <div id="confirmPasswordError" class="error"></div>
+            </div>
+            <hr>
+            <h4>PERSONAL INFORMATION</h4>
+            <div>
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your fullname">
+                <div id="nameError" class="error"></div>
+            </div>
+            <div>
+                <label for="dateOfBirth">Date of Birth:</label>
+                <input type="date" id="dateOfBirth" name="dateOfBirth">
+                <div id="dateError" class="error"></div>
+            </div>
+            <div>
+                <div class="gender_field">
+                    <label for="gender">Gender:</label><br>
+                    <input type="radio" name="gender" id="male" value="Male">
+                    <label class="rad_label" for="male">Male</label>
+                    <input type="radio" name="gender" id="female" value="Female">
+                    <label class="rad_label" for="female">Female</label>
+                    <input type="radio" name="gender" id="other" value="Other">
+                    <label class="rad_label" for="other">Other</label>
+                </div>
+                <div id="genderError" class="error"></div>
+            </div>
+            <div>
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Enter the phone number">
+                <div id="phoneError" class="error"></div>
+            </div>
+            <div>
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" rows="4" placeholder="Enter the Address"></textarea>
+                <div id="addressError" class="error"></div>
+            </div>
+            <div>
+                <label for="experience">Experience:</label>
+                <input type="number" id="experience" name="experience" placeholder="Enter your experience in years">
+                <div id="experienceError" class="error"></div>
+            </div>
+            <div>
+                <label for="speciality">Speciality:</label>
+                <input type="text" id="speciality" name="speciality" placeholder="Enter your specialisation">
+                <div id="specialityError" class="error"></div>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form submission for validation
+
+            // Clear all error messages
+            const errorMessages = document.querySelectorAll('.error');
+            errorMessages.forEach(error => error.textContent = '');
+
+            let isValid = true;
+
+            // Username validation
+            const username = document.getElementById('username').value.trim();
+            if (username === '') {
+                document.getElementById('usernameError').textContent = 'Username is required.';
+                isValid = false;
+            } else if (username.length < 3) {
+                document.getElementById('usernameError').textContent = 'Username must be at least 3 characters.';
+                isValid = false;
+            }
+
+            // Email validation
+            const email = document.getElementById('email').value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email === '') {
+                document.getElementById('emailError').textContent = 'Email is required.';
+                isValid = false;
+            } else if (!emailRegex.test(email)) {
+                document.getElementById('emailError').textContent = 'Please enter a valid email address.';
+                isValid = false;
+            }
+
+            // Password validation
+            const password = document.getElementById('password').value.trim();
+            if (password === '') {
+                document.getElementById('passwordError').textContent = 'Password is required.';
+                isValid = false;
+            } else if (password.length < 6) {
+                document.getElementById('passwordError').textContent = 'Password must be at least 6 characters.';
+                isValid = false;
+            }
+
+            // Confirm password validation
+            const confirmPassword = document.getElementById('confirmpassword').value.trim();
+            if (confirmPassword == "") {
+                document.getElementById('confirmPasswordError').textContent = 'Plese enter the password again';
+                isValid = false;
+            }
+            if (confirmPassword !== password) {
+                document.getElementById('confirmPasswordError').textContent = 'Passwords do not match.';
+                isValid = false;
+            }
+
+            // Full name validation
+            const name = document.getElementById('name').value.trim();
+            if (name === '') {
+                document.getElementById('nameError').textContent = 'Full name is required.';
+                isValid = false;
+            } else if (!/^[a-zA-Z\s]+$/.test(name)) {
+                document.getElementById('nameError').textContent = 'Full name must contain only letters and spaces.';
+                isValid = false;
+            }
+
+            // Date of Birth validation
+            const dateOfBirth = document.getElementById('dateOfBirth').value;
+            if (dateOfBirth === '') {
+                document.getElementById('dateError').textContent = 'Date of Birth is required.';
+                isValid = false;
+            }
+
+            // Gender validation
+            const gender = document.querySelector('input[name="gender"]:checked');
+            if (!gender) {
+                document.getElementById('genderError').textContent = 'Please select your gender.';
+                isValid = false;
+            }
+
+            // Phone number validation
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            const phoneRegex = /^\d{10}$/;
+            if (phoneNumber === '') {
+                document.getElementById('phoneError').textContent = 'Phone number is required.';
+                isValid = false;
+            } else if (!phoneRegex.test(phoneNumber)) {
+                document.getElementById('phoneError').textContent = 'Please enter a valid 10-digit phone number.';
+                isValid = false;
+            }
+
+            // Address validation
+            const address = document.getElementById('address').value.trim();
+            if (address === '') {
+                document.getElementById('addressError').textContent = 'Address is required.';
+                isValid = false;
+            }
+
+            const experience = document.getElementById('experience').value.trim();
+            if (address === '') {
+                document.getElementById('experienceError').textContent = 'Please enter your experience';
+                isValid = false;
+            }
+
+            const speciality= document.getElementById('speciality').value.trim();
+            if (address === '') {
+                document.getElementById('specialityError').textContent = 'Please enter your speciality';
+                isValid = false;
+            }
+
+            // If all validations pass, show success message or submit the form
+            if (isValid) {
+                alert('Form submitted successfully!');
+                // Optionally, you can submit the form here if needed
+                // document.getElementById('registrationForm').submit();
+            }
+        });
+    </script>
+
+</body>
+</html>
