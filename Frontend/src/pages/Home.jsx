@@ -1,15 +1,52 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Roadmap from "../components/Roadmap";
 import ReportImage from "../assets/Reports.jpg";
 import ChatBotImage from "../assets/ChatBot.jpg";
 import Appointment from "../assets/Appointment.jpg";
+import React, { memo } from "react";
+
+const FeatureCard = memo(function FeatureCard({
+  imgSrc,
+  title,
+  description,
+  animationDirection,
+}) {
+  const shouldReduceMotion = useReducedMotion();
+
+  return (
+    <motion.div
+      className="bg-white p-8 rounded-lg shadow-lg w-full will-change-transform"
+      initial={{
+        opacity: shouldReduceMotion ? 1 : 0,
+        x: shouldReduceMotion ? 0 : animationDirection === "left" ? -50 : 50,
+      }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.8 }}
+    >
+      <img
+        src={imgSrc}
+        alt={title}
+        className="w-full h-40 object-cover rounded-t-lg mb-4"
+        loading="lazy"
+      />
+      <h3 className="text-xl font-bold mb-4">{title}</h3>
+      <p className="text-gray-600">{description}</p>
+    </motion.div>
+  );
+});
+
 export default function Home() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <div className="bg-gray-100 text-gray-800 font-mainFont">
       <section className="relative text-white h-screen flex items-center justify-center bg-mainBackgroundImage">
         <motion.div
-          className="text-center"
-          initial={{ opacity: 0, scale: 0.8 }}
+          className="text-center will-change-transform"
+          initial={{
+            opacity: shouldReduceMotion ? 1 : 0,
+            scale: shouldReduceMotion ? 1 : 0.8,
+          }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
         >
@@ -19,19 +56,10 @@ export default function Home() {
           <p className="text-lg lg:text-2xl mb-6">
             Your AI-powered doctor-patient consultation platform.
           </p>
-          <motion.button
-            className="bg-white text-sky-500 font-bold py-3 px-6 rounded-full shadow-lg hover:bg-blue-50 transition-all"
-            whileHover={{ scale: 1.1 }}
-          >
+          <button className="bg-white text-sky-500 font-bold py-3 px-6 rounded-full shadow-lg hover:bg-blue-50 transition-all button-hover">
             Get Started
-          </motion.button>
+          </button>
         </motion.div>
-        <motion.div
-          className="absolute bottom-0 left-0 w-full"
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.5, duration: 1 }}
-        ></motion.div>
       </section>
 
       {/* Features Section */}
@@ -43,62 +71,28 @@ export default function Home() {
           </p>
         </div>
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 px-6">
-          {/* Feature 1 */}
-          <motion.div
-            className="bg-white p-8 rounded-lg shadow-lg w-full"
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <img
-              src={ReportImage}
-              alt="Upload Reports"
-              className="w-full h-40 object-cover rounded-t-lg mb-4"
-            />
-            <h3 className="text-xl font-bold mb-4">Upload Your Reports</h3>
-            <p className="text-gray-600">
-              Securely upload your medical reports and access them anytime,
-              anywhere.
-            </p>
-          </motion.div>
-          {/* Feature 2 */}
-          <motion.div
-            className="bg-white p-8 rounded-lg shadow-lg w-full"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <img
-              src={ChatBotImage}
-              alt="AI Chatbot"
-              className="w-full h-40 object-cover rounded-t-lg mb-4"
-            />
-            <h3 className="text-xl font-bold mb-4">AI Chatbot Consultation</h3>
-            <p className="text-gray-600">
-              Talk to our AI-powered chatbot for quick medical advice and
-              support.
-            </p>
-          </motion.div>
-          {/* Feature 3 */}
-          <motion.div
-            className="bg-white p-8 rounded-lg shadow-lg w-full"
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <img
-              src={Appointment}
-              alt="Book Appointments"
-              className="w-full h-40 object-cover rounded-t-lg mb-4"
-            />
-            <h3 className="text-xl font-bold mb-4">Book Appointments</h3>
-            <p className="text-gray-600">
-              Find doctors and hospitals near you and book appointments easily.
-            </p>
-          </motion.div>
+          <FeatureCard
+            imgSrc={ReportImage}
+            title="Upload Your Reports"
+            description="Securely upload your medical reports and access them anytime, anywhere."
+            animationDirection="left"
+          />
+          <FeatureCard
+            imgSrc={ChatBotImage}
+            title="AI Chatbot Consultation"
+            description="Talk to our AI-powered chatbot for quick medical advice and support."
+            animationDirection="up"
+          />
+          <FeatureCard
+            imgSrc={Appointment}
+            title="Book Appointments"
+            description="Find doctors and hospitals near you and book appointments easily."
+            animationDirection="right"
+          />
         </div>
       </section>
 
+      {/* Top Doctors Section */}
       <section className="py-16">
         <div className="text-center mb-20">
           <h2 className="text-3xl lg:text-5xl font-bold">
@@ -110,8 +104,7 @@ export default function Home() {
           </p>
         </div>
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-wrap lg:flex-nowrap lg:overflow-x-auto lg:space-x-12 ">
-            {/* Circular Cards */}
+          <div className="flex flex-wrap lg:flex-nowrap lg:overflow-x-auto lg:space-x-12">
             {[
               {
                 title: "Period doubts or Pregnancy",
@@ -141,15 +134,19 @@ export default function Home() {
               <div
                 key={index}
                 className="flex flex-col items-center mb-8 lg:mb-0"
-                initial={{ opacity: 0, y: 50 }}
+                initial={{
+                  opacity: shouldReduceMotion ? 1 : 0,
+                  y: shouldReduceMotion ? 0 : 50,
+                }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
+                transition={{ duration: 0.8, delay: 0.2 * index }}
               >
                 <div className="w-32 h-32 rounded-full mb-4 overflow-hidden">
                   <img
                     src={item.img}
                     alt={item.title}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                 </div>
                 <h3 className="text-lg font-semibold text-center mb-2">
