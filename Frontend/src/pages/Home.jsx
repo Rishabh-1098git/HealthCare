@@ -21,7 +21,7 @@ const FeatureCard = memo(function FeatureCard({
         x: shouldReduceMotion ? 0 : animationDirection === "left" ? -50 : 50,
       }}
       whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 1.5 }}
     >
       <img
         src={imgSrc}
