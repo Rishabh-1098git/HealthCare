@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login page</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 20px;
+            background-color: white;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: rgb(215, 201, 248);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgb(190, 186, 201);
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .container input {
+            width: 96%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .container button {
+            width: 100%;
+            padding: 10px;
+            background-color: rgb(170, 141, 239);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .container button:hover {
+            background-color: rgb(152, 120, 228);
+        }
+
+        .message {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .success {
+            color: green;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Login Form</h1>
+        <form id="loginForm">
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" /><br>
+                <div id="usernameError" class="error"></div>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" /><br>
+                <div id="passwordError" class="error"></div>
+            </div>
+            <div>
+                <button type="submit" id="submit">Submit</button>
+                <div id="message" class="message"></div>
+            </div>
+            <form>
+    </div>
+    <script>
+        const validUsernames = ["user1", "user2", "user3"];
+        const validPassword = ["pass1", "pass2", "pass3"];
+
+        document.getElementById('loginForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+
+            const errorMessages = document.querySelectorAll('.error');
+            errorMessages.forEach(error => error.textContent = '');
+            const userIndex = validUsernames.indexOf(username);
+            const messageElement = document.getElementById('message');
+
+            let isValid = true;
+            if (username === '') {
+                document.getElementById('usernameError').textContent = 'Username is required.';
+                isValid = false;
+            }
+            if (password === '') {
+                document.getElementById('passwordError').textContent = 'Password is required.';
+                isValid = false;
+            }
+
+            
+
+            if (userIndex !== -1 && validPassword[userIndex] === password) {
+                messageElement.textContent = "Login successful";
+                messageElement.className = "message success";
+            } 
+            if(userIndex == -1 && validPassword[userIndex] !== password){
+                messageElement.textContent = "Invalid username or password";
+                messageElement.className = "message error";
+            }
+            
+
+        });
+    </script>
+</body>
+
+</html>
