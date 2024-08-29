@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor's Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Menu -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="image"><img src="doctors_img.jpg.png" alt="John"></div>
+                <h2>Dr. John Smith</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <ul>
+                    <li><a href="doctors_dashboard.html"><i class="fa-solid fa-list"></i>Dashboard</a></li>
+                    <li><a href="#"><i class="fa-solid fa-calendar-days"></i>Appointments</a></li>
+                    <li><a href="#"><i class="fa-solid fa-user-doctor"></i>Profile</a></li>
+                    <li><a href="#"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header class="dashboard-header">
+                <h1>Doctor's Dashboard</h1>
+            </header>
+
+            <!-- Statistics Section -->
+            <section class="statistics">
+                <div class="stat-item">
+                    <h3><i class="fa-solid fa-laptop-medical"></i>Total Appointments Today</h3>
+                    <p id="appointments-today">5</p> <!-- Example value -->
+                </div>
+                <div class="stat-item">
+                    <h3><i class="fa-solid fa-bed-pulse"></i>Total Patients Treated</h3>
+                    <p id="patients-treated">150</p> <!-- Example value -->
+                </div>
+            </section>
+            <main class="dashboard-main">
+                <!-- Patient Requests Section -->
+                <section class="section patient-requests">
+                    <h2><i class="fa-solid fa-envelope"></i>Patient Requests</h2>
+                    <ul>
+                        <li>
+                            <div class="request-info">
+                                <div>John Doe - Request for Prescription Refill</div>
+                                <div class="request-actions">
+                                    <button class="accept">Accept</button>
+                                    <button class="decline">Decline</button>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="request-info">
+                                <div>Jane Smith - Request for Follow-up Appointment</div>
+                                <div class="request-actions">
+                                    <button class="accept">Accept</button>
+                                    <button class="decline">Decline</button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+                <!-- Upcoming Appointments Section -->
+                <section class="section appointments">
+                    <h2><i class="fa-solid fa-calendar-days"></i>Upcoming Appointments</h2>
+                    <ul>
+                        <li>John Doe - 10:00 AM</li>
+                        <li>Jane Smith - 11:00 AM</li>
+                        <li>Michael Brown - 01:00 PM</li>
+                    </ul>
+                </section>
+
+                <!-- Patients' Reports Section -->
+                <section class="section reports">
+                    <h2><i class="fa-solid fa-file-medical"></i>Patients' Reports</h2>
+                    <ul>
+                        <li><a href="#">John Doe - Blood Test Report</a></li>
+                        <li><a href="#">Jane Smith - MRI Scan Report</a></li>
+                        <li><a href="#">Michael Brown - X-Ray Report</a></li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>
