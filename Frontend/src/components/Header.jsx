@@ -1,10 +1,39 @@
 import React from "react";
-
+import { useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../firebase";
+import { toast } from "react-toastify";
+import { signOut } from "firebase/auth";
 function Header() {
+  const [user] = useAuthState(auth);
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    navigate("/signup");
+  };
+
+  const handlehome = () => {
+    navigate("/");
+  };
+
+  function logout() {
+    signOut(auth)
+      .then(() => {
+        toast.success("Logged out successfully!");
+        navigate("/");
+      })
+      .catch((error) => {
+        toast.success("Error signing out:", error);
+      });
+  }
+
   return (
-    <header class="flex items-center justify-between px-6 py-4 bg-white shadow-md font-mainFont">
-      <div class="flex items-center space-x-2">
-        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+    <header class="flex items-center justify-between px-6 py-4 bg-white shadow-md font-mainFont sticky ">
+      <div
+        class="flex items-center space-x-2 cursor-pointer"
+        onClick={handlehome}
+      >
+        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center cursor-pointer">
           <svg
             class="w-5 h-5 text-white"
             fill="none"
@@ -23,8 +52,12 @@ function Header() {
         <h1 class="text-2xl font-bold text-gray-800">CareSync</h1>
       </div>
 
-      <nav class="space-x-4 text-md font-medium">
-        <a href="#" class="text-gray-700 hover:text-blue-500">
+      <nav class="space-x-4 text-lg font-medium">
+        <a
+          href="#"
+          class="text-gray-700 hover:text-blue-500"
+          onClick={handlehome}
+        >
           Home
         </a>
         <a href="#" class="text-gray-700 hover:text-blue-500">
@@ -39,9 +72,21 @@ function Header() {
       </nav>
 
       <div>
-        <button class="text-white bg-sky-500 hover:bg-sky-600 border-blue-500 border-2 py-2 px-4 rounded-full transition-all duration-200 ease-in-out">
-          Login/SignUp
-        </button>
+        {!user ? (
+          <button
+            class="text-white bg-sky-500 hover:bg-sky-600 border-2 py-2 px-4 rounded-full transition-all duration-200 ease-in-out shadow-xl font-semibold"
+            onClick={handleLogin}
+          >
+            Login/SignUp
+          </button>
+        ) : (
+          <button
+            class="text-white bg-sky-500 hover:bg-sky-600 border-2 py-2 px-4 rounded-full transition-all duration-200 ease-in-out shadow-xl font-semibold"
+            onClick={logout}
+          >
+            Logout
+          </button>
+        )}
       </div>
     </header>
   );
