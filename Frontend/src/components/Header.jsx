@@ -4,8 +4,14 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import { signOut } from "firebase/auth";
+import { useState } from "react";
+import { useEffect } from "react";
+import { doc, db } from "../../firebase";
+import { getDoc } from "firebase/firestore";
 function Header() {
   const [user] = useAuthState(auth);
+  console.log(user);
+
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -14,6 +20,14 @@ function Header() {
 
   const handlehome = () => {
     navigate("/");
+  };
+
+  const handleDashboard = () => {
+    if (role === "patient") {
+      navigate("/patientsdashboard");
+    } else {
+      navigate("/doctorsdashboard");
+    }
   };
 
   function logout() {
@@ -26,6 +40,31 @@ function Header() {
         toast.success("Error signing out:", error);
       });
   }
+
+  const [role, setRole] = useState(null);
+  const userId = user?.uid;
+  useEffect(() => {
+    const fetchUserRole = async () => {
+      try {
+        const userRef = doc(db, "users", userId); // Accessing the specific user document
+        const userSnap = await getDoc(userRef);
+
+        if (userSnap.exists()) {
+          const userData = userSnap.data();
+          setRole(userData.role); // Assuming `role` is a field in your user document
+          console.log("Role:", userData.role);
+        } else {
+          console.log("No such document!");
+        }
+      } catch (error) {
+        console.error("Error fetching role:", error);
+      }
+    };
+
+    if (userId) {
+      fetchUserRole(); // Call the function to fetch the role
+    }
+  }, [userId]);
 
   return (
     <header class="flex items-center justify-between px-6 py-4 bg-white shadow-md font-mainFont sticky ">
@@ -63,7 +102,11 @@ function Header() {
         <a href="#" class="text-gray-700 hover:text-blue-500">
           Services
         </a>
-        <a href="#" class="text-gray-700 hover:text-blue-500">
+        <a
+          href="#"
+          class="text-gray-700 hover:text-blue-500"
+          onClick={handleDashboard}
+        >
           Dashboard
         </a>
         <a href="#" class="text-gray-700 hover:text-blue-500">

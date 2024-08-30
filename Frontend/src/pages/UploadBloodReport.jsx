@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FiUpload, FiFile, FiX } from "react-icons/fi"; // Import additional icons
-import { storage } from "../../firebase.js"; // Adjust the path based on your project structure
+import { FiUpload, FiFile, FiX } from "react-icons/fi";
+import { storage } from "../../firebase.js";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const UploadBloodReport = () => {
@@ -24,7 +24,6 @@ const UploadBloodReport = () => {
 
     if (!report) return;
 
-    // Create a reference to the file in Firebase Storage
     const storageRef = ref(storage, `reports/${report.name}`);
     const uploadTask = uploadBytesResumable(storageRef, report);
 
