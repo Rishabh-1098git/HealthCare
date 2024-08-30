@@ -1,0 +1,147 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: serif;
+    background-color: #f4f3f5;
+}
+
+.dashboard-container {
+    display: flex;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #7e3ce0;
+    color: rgb(255, 252, 252);
+    padding: 20px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.sidebar-header h2 {
+    margin-bottom: 40px;
+    font-size: 35px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.sidebar-menu ul {
+    list-style-type: none;
+}
+
+.sidebar-menu ul li {
+    margin-bottom: 20px;
+}
+
+.sidebar-menu ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar-menu ul li a:hover {
+    background-color: #7e1eb1;
+}
+
+.main-content {
+    margin-left: 270px;
+    padding: 20px;
+    width: calc(100% - 270px);
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-header h1 {
+    margin-bottom: 40px;
+    font-size: 35px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Profile Section */
+.profile-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.profile-card {
+    background-color: rgb(222, 195, 242);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 600px;
+    padding: 20px;
+    text-align: center;
+}
+
+.profile-image img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+.profile-details h2 {
+    margin-bottom: 40px;
+    font-size: 35px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.profile-details p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.edit-profile {
+    background-color: #9440de;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.edit-profile:hover {
+    background-color: #7519a4;
+}
+
+i{
+    margin-right: 20px;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+    }
+
+    .profile-card {
+        width: 100%;
+        padding: 20px;
+    }
+}

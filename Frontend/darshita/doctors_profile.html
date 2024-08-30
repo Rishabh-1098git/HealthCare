@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor's Profile</title>
+    <link rel="stylesheet" href="doctors_profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Menu -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>CareSync</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <ul>
+                    <li><a href="doctors_dashboard.html"><i class="fa-solid fa-list"></i>Dashboard</a></li>
+                    <li><a href="appointments.html"><i class="fa-solid fa-calendar-days"></i>Appointments</a></li>
+                    <li><a href="doctors_profile.html"><i class="fa-solid fa-user-doctor"></i>Profile</a></li>
+                    <li><a href="#"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header class="profile-header">
+                <h1>Doctor's Profile</h1>
+            </header>
+
+            <!-- Doctor's Profile Section -->
+            <section class="profile-section">
+                <div class="profile-card">
+                    <div class="profile-image">
+                        <img src="doctors_img.jpg.png" alt="Doctor Profile Picture">
+                    </div>
+                    <div class="profile-details">
+                        <h2>Dr. John Smith</h2>
+                        <p><strong>Date of Birth:</strong> January 1, 1970</p>
+                        <p><strong>Gender:</strong> Male</p>
+                        <p><strong>Phone Number:</strong> (123) 456-7890</p>
+                        <p><strong>Email Address:</strong> john.smith@example.com</p>
+                        <p><strong>Experience:</strong> 15 Years</p>
+                        <p><strong>Specialty:</strong> Cardiology</p>
+                        <button class="edit-profile">Edit Profile</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
